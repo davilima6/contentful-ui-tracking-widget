@@ -5,6 +5,34 @@
     <script src="https://unpkg.com/contentful-ui-extensions-sdk@3/dist/cf-extension-api.js"></script>
     <script src="https://unpkg.com/json-editor@0.7.28/dist/jsoneditor.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/contentful-ui-extensions-sdk@3/dist/cf-extension.css" />
+    <style>
+      .jfe-header {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+      }
+      .jfe-label {
+        color: #8091a5;
+      }
+      .jfe-table-header-cell {
+        color: #8091a5;
+        font-style: italic;
+        font-weight: normal;
+        text-align: left;
+      }
+      .jfe-indented-panel .jfe-grid-column:not([data-schematype='array']) > .jfe-indented-panel {
+        margin-left: 1em;
+      }
+      .jfe-indented-panel .jfe-grid-column:not([data-schematype='array']) > .jfe-header {
+        border-bottom: 1px solid rgb(195, 207, 213);
+        font-size: 1.5em;
+        margin-bottom: 1em;
+        padding-bottom: 2px;
+      }
+      .jfe-grid-column[data-schematype='array'] > .jfe-header {
+        color: #8091a5;
+        font-size: 1em;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -121,9 +149,8 @@
 
       // https://github.com/jdorn/json-editor/blob/master/examples/advanced.html
       // TODO: Make this configurable on Data Type level.
-      /*eslint quotes: [2, "double"]*/
       window.CONTENTFUL_FORM_EDITOR_SCHEMA = {
-        title: 'Tracking Data',
+        title: ' ',
         type: 'object',
         properties: {
           ga: {
@@ -131,16 +158,19 @@
             title: 'Google Analytics',
             properties: {
               eventAction: {
+                title: 'Event Action',
                 type: 'string',
                 propertyOrder: 10,
               },
               eventCategory: {
+                title: 'Event Category',
                 type: 'string',
                 enum: ['userInteraction', 'conversion'],
                 default: 'userInteraction',
                 propertyOrder: 20,
               },
               eventLabel: {
+                title: 'Event Label',
                 type: 'string',
                 propertyOrder: 30,
               },
@@ -151,16 +181,19 @@
             title: 'Amplitude',
             properties: {
               eventName: {
+                title: 'Event Name',
                 type: 'string',
                 propertyOrder: 40,
               },
               eventType: {
+                title: 'Event Type',
                 type: 'string',
                 enum: ['user Interaction', 'conversion'],
                 default: 'user Interaction',
                 propertyOrder: 50,
               },
               eventProperties: {
+                title: 'Event Properties',
                 type: 'array',
                 format: 'table',
                 title: 'Event Properties',
@@ -170,9 +203,12 @@
                   type: 'object',
                   properties: {
                     key: {
+                      title: 'Property Name',
                       type: 'string',
+                      default: 'Event description',
                     },
                     value: {
+                      title: 'Property Description',
                       type: 'string',
                     },
                   },
@@ -199,6 +235,8 @@
           startval: cfApi.field.getValue(),
           disable_collapse: true,
           disable_properties: true,
+          disable_edit_json: true,
+          disable_array_reorder: true,
           show_errors: 'always',
         });
 
