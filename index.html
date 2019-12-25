@@ -36,6 +36,76 @@
   </head>
   <body>
     <script>
+      window.CONTENTFUL_FORM_EDITOR_SCHEMA = {
+        title: ' ',
+        type: 'object',
+        properties: {
+          ga: {
+            type: 'object',
+            title: 'Google Analytics',
+            properties: {
+              eventAction: {
+                title: 'Event Action',
+                type: 'string',
+                propertyOrder: 10,
+              },
+              eventCategory: {
+                title: 'Event Category',
+                type: 'string',
+                enum: ['userInteraction', 'conversion'],
+                default: 'userInteraction',
+                propertyOrder: 20,
+              },
+              eventLabel: {
+                title: 'Event Label',
+                type: 'string',
+                propertyOrder: 30,
+              },
+            },
+          },
+          amplitude: {
+            type: 'object',
+            title: 'Amplitude',
+            properties: {
+              eventName: {
+                title: 'Event Name',
+                type: 'string',
+                propertyOrder: 40,
+              },
+              eventType: {
+                title: 'Event Type',
+                type: 'string',
+                enum: ['user Interaction', 'conversion'],
+                default: 'user Interaction',
+                propertyOrder: 50,
+              },
+              eventProperties: {
+                title: 'Event Properties',
+                type: 'array',
+                format: 'table',
+                title: 'Event Properties',
+                uniqueItems: true,
+                propertyOrder: 60,
+                items: {
+                  type: 'object',
+                  properties: {
+                    key: {
+                      title: 'Property Name',
+                      type: 'string',
+                      default: 'Event description',
+                    },
+                    value: {
+                      title: 'Property Description',
+                      type: 'string',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      };
+
       JSONEditor.defaults.themes.contentful = (function(JSONEditor) {
         var PARENT = JSONEditor.AbstractTheme;
 
@@ -146,78 +216,6 @@
           };
         }
       })(JSONEditor);
-
-      // https://github.com/jdorn/json-editor/blob/master/examples/advanced.html
-      // TODO: Make this configurable on Data Type level.
-      window.CONTENTFUL_FORM_EDITOR_SCHEMA = {
-        title: ' ',
-        type: 'object',
-        properties: {
-          ga: {
-            type: 'object',
-            title: 'Google Analytics',
-            properties: {
-              eventAction: {
-                title: 'Event Action',
-                type: 'string',
-                propertyOrder: 10,
-              },
-              eventCategory: {
-                title: 'Event Category',
-                type: 'string',
-                enum: ['userInteraction', 'conversion'],
-                default: 'userInteraction',
-                propertyOrder: 20,
-              },
-              eventLabel: {
-                title: 'Event Label',
-                type: 'string',
-                propertyOrder: 30,
-              },
-            },
-          },
-          amplitude: {
-            type: 'object',
-            title: 'Amplitude',
-            properties: {
-              eventName: {
-                title: 'Event Name',
-                type: 'string',
-                propertyOrder: 40,
-              },
-              eventType: {
-                title: 'Event Type',
-                type: 'string',
-                enum: ['user Interaction', 'conversion'],
-                default: 'user Interaction',
-                propertyOrder: 50,
-              },
-              eventProperties: {
-                title: 'Event Properties',
-                type: 'array',
-                format: 'table',
-                title: 'Event Properties',
-                uniqueItems: true,
-                propertyOrder: 60,
-                items: {
-                  type: 'object',
-                  properties: {
-                    key: {
-                      title: 'Property Name',
-                      type: 'string',
-                      default: 'Event description',
-                    },
-                    value: {
-                      title: 'Property Description',
-                      type: 'string',
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      };
 
       var cfExt = window.contentfulExtension || window.contentfulWidget;
 
