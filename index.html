@@ -225,6 +225,11 @@
         cfApi.window.startAutoResizer();
 
         var editorElem = createElement('div', { className: 'jfe-editor-root' });
+        var enableEditJson = cfApi.parameters.instance.enableEditJson;
+        var enableArrayReorder = cfApi.parameters.instance.enableArrayReorder;
+        enableEditJson = enableEditJson !== undefined && enableEditJson !== null ? enableEditJson : false;
+        enableArrayReorder =
+          enableArrayReorder !== undefined && enableArrayReorder !== null ? enableArrayReorder : false;
         var editor = new JSONEditor(editorElem, {
           theme: 'contentful',
           schema: window.CONTENTFUL_FORM_EDITOR_SCHEMA,
@@ -233,8 +238,8 @@
           startval: cfApi.field.getValue(),
           disable_collapse: true,
           disable_properties: true,
-          disable_edit_json: true,
-          disable_array_reorder: true,
+          disable_edit_json: !enableEditJson,
+          disable_array_reorder: !enableArrayReorder,
           show_errors: 'always',
         });
 

@@ -2,5 +2,32 @@
   "id": "trackingWidget",
   "name": "Tracking Widget",
   "srcdoc": "./index.html",
-  "fieldTypes": ["Object"]
+  "fieldTypes": ["Object"],
+  "parameters": {
+    "installation": [
+      {
+        "id": "isDevMode",
+        "name": "Development mode",
+        "description": "This enables debug helpers for this extension",
+        "type": "Boolean",
+        "default": false
+      }
+    ],
+    "instance": [
+      {
+        "id": "enableEditJson",
+        "name": "Enable \"Edit JSON\" button for objects",
+        "description": "This allows to view and edit the tracking configuration as stored on Contentful",
+        "type": "Boolean",
+        "default": false
+      },
+      {
+        "id": "enableArrayReorder",
+        "name": "Enable \"move up/down\" buttons for arrays",
+        "description": "This allows array items to be reordered, in case that is needed by a specific content type",
+        "type": "Boolean",
+        "default": false
+      }
+    ]
+  }
 }
